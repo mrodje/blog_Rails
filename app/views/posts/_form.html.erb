@@ -1,0 +1,48 @@
+<%= form_with(model: post, local: true) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :post_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user %>
+    <!-- <#%= form.select(:user, users_for_select, :prompt => 'Pick one') %> -->
+    <%= form.collection_select(:user_id, User.all, :id, :full_name, :prompt => 'Pick one') %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.date_select :date, id: :post_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :heading %>
+    <%= form.text_area :heading, id: :post_heading %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, id: :post_content %>
+  </div>
+
+  <div class="field">
+    <%= form.file_field :avatar %>
+    <%= form.hidden_field :avatar_cache, id: :post_avatar %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,34 @@
+
+
+<h1>Posts</h1>
+
+<%= will_paginate @posts %>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Date</th>
+      <th>Heading</th>
+      <th>Avatar</th>
+      <th>Author</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= link_to post.title, post %></td>
+        <td><%= post.date %></td>
+        <td><%= post.heading %></td>
+        <td><%= image_tag(post.avatar_url(:thumb)) if post.avatar? %></td>
+        <td><%= link_to @author.full_name, @author %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @posts %>
+
+<br>
+
+<%= link_to 'New Post', new_post_path %>

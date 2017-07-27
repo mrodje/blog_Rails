@@ -1,0 +1,34 @@
+
+
+<i><%= @author.full_name %></i>
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @post.date %>
+</p>
+
+<p>
+  <strong>Heading:</strong>
+  <%= @post.heading %>
+</p>
+
+<p>
+  <strong>Avatar:</strong>
+  <%= image_tag(@post.avatar_url) if @post.avatar? %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @post.content %>
+</p>
+
+
+<% if current_user.id == @post.user_id %>
+  <td><%= link_to 'Edit', edit_post_path(@post) %></td>
+  <td><%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<% end %>
+<%= link_to 'Back', posts_path %>
